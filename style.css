@@ -1,0 +1,112 @@
+/*メインのカスタム*/
+
+#target{
+  margin: 10px auto;
+  width:1200px;
+  height:500px;
+}
+
+h1{
+  font-weight: bold;
+  float: left;
+  margin-left: 50px;
+}
+
+nav ul{
+  float:right;
+  margin-left: 100px;
+}
+
+nav ul li{
+    float: left;
+    list-style: none;
+}
+nav ul li button{
+  font-size: 1.3em;
+  color: #FFF;
+  margin-right: 30px;
+  padding: 10px 20px;
+  background-color: #006EFF;
+  border-radius: 20px;
+  transition-duration: 0.5s;
+}
+
+nav ul li button:hover{
+  background-color: #3377FF;
+  text-shadow: 0 0 6px #FFF;
+  box-shadow: 0 0 6px #37F;
+}
+
+header{
+  width:100%;
+  height:100px;
+  border-bottom:solid #006EFF 5px;
+  height:20%;
+
+}
+
+header:after{
+  content:'';
+  display:block;
+  clear:both;
+}
+
+.message{
+  text-align: center;
+}
+
+.toSearch{
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition-duration: 0.5s;
+  background-color: #006EFF;
+  color:#FFF;
+  font-size: 1.3em;
+}
+
+.toSearch:hover{
+  background-color: #3377FF;
+  text-shadow: 0 0 6px #FFF;
+  box-shadow: 0 0 6px #37F;
+}
+
+.searchParent{
+  display: block;
+  width: auto;
+  text-align: center;
+}
+/*ここからsearch用*/
+
+.searchForm{
+  display: block;
+  text-align: center;
+  width: auto;
+}
+
+.searchForm h2{
+  text-align: left;
+  margin-left: 100px;
+}
+
+.searchForm form label{
+  font-size: 20px;
+  margin-bottom: 800px;
+  padding-bottom: 800px;
+}
+
+.go{
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition-duration: 0.5s;
+  background-color: #006EFF;
+  color:#FFF;
+  font-size: 1.3em;
+}
+
+.go:hover{
+  background-color: #3377FF;
+  text-shadow: 0 0 6px #FFF;
+  box-shadow: 0 0 6px #37F;
+}
