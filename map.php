@@ -29,6 +29,45 @@
   </header>
 
   <main>
+    <?php
+    $mysqli = new mysqli('localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane');
+    if($mysqli->connect_error){
+      echo $mysqli->connect_error;
+      exit();
+    }
+    else{
+      $mysqli->set_charset("utf-8");
+    }
+
+    if($type || $region || $prefecture || $faculty || $graduate){
+      $con = "WHERE";
+      if($type){
+        $con .= " AND university_type = '$type'";
+      }
+      if($region){
+        $con .= " AND university_region = '$region'";
+      }
+      if($prefecture){
+        $con .= " AND university_prefecture = '$prefecture'";
+      }
+      if($faculty){
+        $con .= " AND university_faculty = '$faculty'";
+      }
+      if($graduate){
+        $con .= " AND university_graduate = '$graduate'";
+      }
+      $sql = "SELECT * FROM university_table $con";
+    }
+    else{
+      $sql = "SELECT * FROM university_table";
+    }
+
+    echo "<p>発行されているsql文：$sql</p><br>";
+
+
+    $mysqli->close();
+     ?>
+
     <div id="target">
       <script
       src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBVNWrMt19jJzpCOHDw6VN2g-LZdxuHIj4&callback=initMAP" async defer></script>
