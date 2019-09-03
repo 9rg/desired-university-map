@@ -8,12 +8,13 @@
 
 <body>
   <?php
-  $type = $_POST['type'];
-  $region = $_POST['region'];
-  $prefecture = $_POST['prefecture'];
-  $faculty = $_POST['faculty'];
-  $graduate = $_POST['graduate'];
-  $count=0;
+  if(isset($_POST['type'])){
+    $type = $_POST['type'];
+    $region = $_POST['region'];
+    $prefecture = $_POST['prefecture'];
+    $faculty = $_POST['faculty'];
+    $graduate = $_POST['graduate'];
+  }
   ?>
 
   <header>
@@ -42,7 +43,7 @@
     if($type || $region || $prefecture || $faculty || $graduate){
       $con = "WHERE";
       if($type){
-        $con .= " AND university_type = '$type'";
+        $con .= " university_type = '$type'";
       }
       if($region){
         $con .= " AND university_region = '$region'";
@@ -58,22 +59,29 @@
       }
       $sql = "SELECT * FROM university_table $con";
     }
-    else{
+    elseif(isset($_POST['type'])){
       $sql = "SELECT * FROM university_table";
     }
 
     echo "<p>発行されているsql文：$sql</p><br>";
 
-
+    $count == 0;
+    if($result = $mysqli->query($sql)){
+      while($row = $result->fetch_assoc()){
+        $lat[] = $row['latitude'];
+        $lng[] = $row['longitude'];
+        $name[] = $row['university_name'];
+        $count++;
+      }
+    }
     $mysqli->close();
-     ?>
+    ?>
 
     <div id="target">
       <script
       src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBVNWrMt19jJzpCOHDw6VN2g-LZdxuHIj4&callback=initMAP" async defer></script>
       <script>
       function initMAP(){
-        "use strict";
         var target = document.getElementById('target');//描画領域の取得
         var map;//マップ用の変数
         var tokyo = {lat: 35.681167, lng: 139.767052};//マップで表示したい位置
@@ -85,23 +93,30 @@
           mapTypeID: 'roadmap',
           clickableIcons: true
         });
-      }
-      google.maps.event.addDomlistener( window, 'load', initMAP );
-      </script>
-    </div>
-
-    <section class="searchParent">
-      <?php
-      if(!$type){
-        echo '<p class="message">下のボタンから<br>検索条件を設定してください</p>';
-      }
-      else {
-        echo '<p class="message">区分:'.$type.' 地方:'.$region.' 都道府県:'.$prefecture.' 学部:'.$faculty.' 大学院の有無:'.$graduate.'<br>';
-        echo 'に該当する大学が'.$count.'件見つかりました。</p>';
-      }
-      ?>
-      <button class="toSearch" onclick="location.href='search.php'">検索条件の設定・変更</button>
-    </section>
-  </main>
-</body>
-</html>
+        <?php
+        $i = 0;
+        while($i<$count){
+          echo 'var point = {lat: '. $lat[$i] .', lng: '. $lng[$i] .'};';
+          echo 'marker = new google.maps.Marker({ position: point, map: map});';
+          $i++;
+        }
+        ?>
+          google.maps.event.addDomlistener( window, 'load', initialize);
+        }
+        </script>
+      </div>
+      <section class="searchParent">
+        <?php
+        if(!$type){
+          echo '<p class="message">下のボタンから<br>検索条件を設定してください</p>';
+        }
+        else {
+          echo '<p class="message">区分:'.$type.' 地方:'.$region.' 都道府県:'.$prefecture.' 学部:'.$faculty.' 大学院の有無:'.$graduate.'<br>';
+          echo 'に該当する大学が'. $count .'件見つかりました。</p>';
+        }
+        ?>
+        <button class="toSearch" onclick="location.href='search.php'">検索条件の設定・変更</button>
+      </section>
+    </main>
+  </body>
+  </html>

@@ -25,8 +25,8 @@
       <form method="post" action="map.php">
         <label for="type">学校の区分</label>
         <select name="type">
-          <option value="私立大学">私立大学</option>
-          <option value="国立大学">国立大学</option>
+          <option value="私立">私立大学</option>
+          <option value="国立">国立大学</option>
           <option value="指定しない">指定しない</option>
         </select><br>
         <label for="region">地方区分</label>
