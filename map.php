@@ -31,52 +31,52 @@
 
   <main>
     <?php
-    $mysqli = new mysqli('localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane');
-    if($mysqli->connect_error){
-      echo $mysqli->connect_error;
-      exit();
-    }
-    else{
-      $mysqli->set_charset("utf-8");
-    }
+    if(isset($_POST['type'])){
 
-    if($type || $region || $prefecture || $faculty || $graduate){
-      $con = "WHERE";
-      if($type){
-        $con .= " university_type = '$type'";
+      $mysqli = new mysqli('localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane');
+      if($mysqli->connect_error){
+        echo $mysqli->connect_error;
+        exit();
       }
-      if($region){
-        $con .= " AND university_region = '$region'";
+      else{
+        $mysqli->set_charset("utf-8");
       }
-      if($prefecture){
-        $con .= " AND university_prefecture = '$prefecture'";
-      }
-      if($faculty){
-        $con .= " AND university_faculty = '$faculty'";
-      }
-      if($graduate){
-        $con .= " AND university_graduate = '$graduate'";
-      }
-      $sql = "SELECT * FROM university_table $con";
-    }
-    elseif(isset($_POST['type'])){
-      $sql = "SELECT * FROM university_table";
-    }
 
-    echo "<p>発行されているsql文：$sql</p><br>";
-
-    $count == 0;
-    if($result = $mysqli->query($sql)){
-      while($row = $result->fetch_assoc()){
-        $lat[] = $row['latitude'];
-        $lng[] = $row['longitude'];
-        $name[] = $row['university_name'];
-        $count++;
+      if($type || $region || $prefecture || $faculty || $graduate){
+        $con = "WHERE";
+        if($type){
+          $con .= " university_type = '$type'";
+        }
+        if($region){
+          $con .= " AND university_region = '$region'";
+        }
+        if($prefecture){
+          $con .= " AND university_prefecture = '$prefecture'";
+        }
+        if($faculty){
+          $con .= " AND university_faculty = '$faculty'";
+        }
+        if($graduate){
+          $con .= " AND university_graduate = '$graduate'";
+        }
+        $sql = "SELECT * FROM university_table $con";
       }
+      elseif(isset($_POST['type'])){
+        $sql = "SELECT * FROM university_table";
+      }
+      echo "<p>発行されているsql文：$sql</p><br>";
+      $count == 0;
+      if($result = $mysqli->query($sql)){
+        while($row = $result->fetch_assoc()){
+          $lat[] = $row['latitude'];
+          $lng[] = $row['longitude'];
+          $name[] = $row['university_name'];
+          $count++;
+        }
+      }
+      $mysqli->close();
     }
-    $mysqli->close();
     ?>
-
     <div id="target">
       <script
       src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBVNWrMt19jJzpCOHDw6VN2g-LZdxuHIj4&callback=initMAP" async defer></script>
@@ -94,29 +94,31 @@
           clickableIcons: true
         });
         <?php
-        $i = 0;
-        while($i<$count){
-          echo 'var point = {lat: '. $lat[$i] .', lng: '. $lng[$i] .'};';
-          echo 'marker = new google.maps.Marker({ position: point, map: map});';
-          $i++;
+        if(isset($_POST['type'])){
+          $i = 0;
+          while($i<$count){
+            echo 'var point = {lat: '. $lat[$i] .', lng: '. $lng[$i] .'};';
+            echo 'marker = new google.maps.Marker({ position: point, map: map});';
+            $i++;
+          }
         }
         ?>
-          google.maps.event.addDomlistener( window, 'load', initialize);
-        }
-        </script>
-      </div>
-      <section class="searchParent">
-        <?php
-        if(!$type){
-          echo '<p class="message">下のボタンから<br>検索条件を設定してください</p>';
-        }
-        else {
-          echo '<p class="message">区分:'.$type.' 地方:'.$region.' 都道府県:'.$prefecture.' 学部:'.$faculty.' 大学院の有無:'.$graduate.'<br>';
-          echo 'に該当する大学が'. $count .'件見つかりました。</p>';
-        }
-        ?>
-        <button class="toSearch" onclick="location.href='search.php'">検索条件の設定・変更</button>
-      </section>
-    </main>
-  </body>
-  </html>
+        google.maps.event.addDomlistener( window, 'load', initialize);
+      }
+      </script>
+    </div>
+    <section class="searchParent">
+      <?php
+      if(!isset($_POST['type'])){
+        echo '<p class="message">下のボタンから<br>検索条件を設定してください</p>';
+      }
+      else {
+        echo '<p class="message">区分:'.$type.' 地方:'.$region.' 都道府県:'.$prefecture.' 学部:'.$faculty.' 大学院の有無:'.$graduate.'<br>';
+        echo 'に該当する大学が'. $count .'件見つかりました。</p>';
+      }
+      ?>
+      <button class="toSearch" onclick="location.href='search.php'">検索条件の設定・変更</button>
+    </section>
+  </main>
+</body>
+</html>
