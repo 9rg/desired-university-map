@@ -13,8 +13,13 @@
       <ul>
         <li><button type="button" onclick="location.href='map.php'">マップ</button></li>
         <li><button type="button" onclick="location.href='search.php'">条件指定</button></li>
-        <li><button type="button" onclick="location.href='bio.html'">当サイトについて</button></li>
-        <li><button type="button" onclick="location.href='register.php'">会員登録・ログイン</button></li>
+        <li><button type="button" onclick="clickEvent()">当サイトについて</button></li>
+        <li><button type="button" onclick="clickEvent()">会員登録・ログイン</button></li>
+        <script type="text/javascript">
+        function clickEvent(){
+          alert('近日公開！');
+        }
+        </script>
       </ul>
     </nab>
   </header>
@@ -27,20 +32,27 @@
         <select name="type">
           <option value="私立">私立大学</option>
           <option value="国立">国立大学</option>
+          <option value="公立">公立大学</option>
           <option value="指定しない">指定しない</option>
         </select><br>
         <label for="region">地方区分</label>
         <select name="region">
-          <option value="北海道地方">北海道地方</option>
-          <option value="東北地方">東北地方</option>
-          <option value="関東地方">関東地方</option>
-          <option value="中国地方">中国地方</option>
-          <option value="近畿地方">近畿地方</option>
-          <option value="四国地方">四国地方</option>
-          <option value="九州地方">九州地方</option>
+          <option value=""></option>
+          <option value="北海道・東北地区">北海道・東北地区</option>
+          <option value="関東（茨木・栃木・群馬）">関東（茨木・栃木・群馬）</option>
+          <option value="関東（埼玉・千葉・神奈川）">関東（埼玉・千葉・神奈川）</option>
+          <option value="関東（東京）">関東（東京）</option>
+          <option value="甲信越地区">甲信越地区</option>
+          <option value="東海・北陸地区">東海・北陸地区</option>
+          <option value="近畿地区">近畿地区</option>
+          <option value="中国・四国地区">中国・四国地区</option>
+          <option value="九州・沖縄地区">九州・沖縄地区</option>
+          <option value="関東・甲信越地区">(国立のみ)関東・甲信越地区</option>
+          <option value="東海・北陸・近畿地区">(国立のみ)東海・北陸・近畿地区</option>
         </select><br>
         <label for="prefecture">都道府県名</label>
         <select name="prefecture">
+          <option value=''></option>
           <?php
           $mysqli = new mysqli( 'localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ' ,'kuragane');
           if( $mysqli->connect_errno ) {
@@ -63,6 +75,7 @@
         </select><br>
         <label for="faculty">学部</label>
         <select name="faculty">
+          <option value=""></option>
           <option value="理工学部">理工学部</option>
           <option value="経済学部">経済学部</option>
         </select><br>
