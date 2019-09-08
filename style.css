@@ -76,6 +76,13 @@ header:after{
   width: auto;
   text-align: center;
 }
+
+/*googlemapのデザイン*/
+.contentsName{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /*ここからsearch用*/
 
 .searchForm{

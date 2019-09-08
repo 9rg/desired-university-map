@@ -28,13 +28,15 @@
     <div class="searchForm">
       <h2>検索条件の設定</h2>
       <form method="post" action="map.php">
+        <p>
         <label for="type">学校の区分</label>
         <select name="type">
           <option value="私立">私立大学</option>
           <option value="国立">国立大学</option>
           <option value="公立">公立大学</option>
           <option value="指定しない">指定しない</option>
-        </select><br>
+        </select></p><br>
+        <p>
         <label for="region">地方区分</label>
         <select name="region">
           <option value=""></option>
@@ -49,7 +51,8 @@
           <option value="九州・沖縄地区">九州・沖縄地区</option>
           <option value="関東・甲信越地区">(国立のみ)関東・甲信越地区</option>
           <option value="東海・北陸・近畿地区">(国立のみ)東海・北陸・近畿地区</option>
-        </select><br>
+        </select></p><br>
+        <p>
         <label for="prefecture">都道府県名</label>
         <select name="prefecture">
           <option value=''></option>
@@ -72,16 +75,18 @@
           }
           $mysqli->close();
           ?>
-        </select><br>
+        </select></p><br>
+        <p>
         <label for="faculty">学部</label>
         <select name="faculty">
           <option value=""></option>
           <option value="理工学部">理工学部</option>
           <option value="経済学部">経済学部</option>
-        </select><br>
+        </select></p><br>
+        <p>
         <label for="大学院">大学院の有無</label>
-        有<input name="graduate" type="radio" value="有">
-        無<input name="graduate" type="radio" value="無"><br>
+        <input name="graduate" type="radio" value="有">有
+        <input name="graduate" type="radio" value="無">無</p><br>
         <input type="submit" value="この条件で検索" name="submit" class="go">
       </form>
     </div>

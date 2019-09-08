@@ -45,7 +45,6 @@
       else{
         $mysqli->set_charset("utf-8");
       }
-
       if($type || $region || $prefecture || $faculty || $graduate){
         $con = "WHERE";
         if($type){
@@ -64,17 +63,20 @@
           $con .= " AND graduate = '$graduate'";
         }
         $sql = "SELECT * FROM universities $con";
+        echo '<script>';
+        echo 'console.log("発行されているSQL文:'. $sql .'");';
+        echo '</script>';
       }
       elseif(isset($_POST['type'])){
         $sql = "SELECT * FROM universities";
       }
-      echo "<p>発行されているsql文：$sql</p><br>";
       $count == 0;
       if($result = $mysqli->query($sql)){
         while($row = $result->fetch_assoc()){
           $lat[] = $row['latitude'];
           $lng[] = $row['longitude'];
           $name[] = $row['name'];
+          $address[] = $row['address'];
           $count++;
         }
       }
@@ -89,7 +91,8 @@
         var target = document.getElementById('target');//描画領域の取得
         var map;//マップ用の変数
         var tokyo = {lat: 35.681167, lng: 139.767052};//マップで表示したい位置
-        var marker; //マーカーのための変数
+        var marker = []; //マーカーのための変数
+        var infoWindow = [];
         map = new google.maps.Map(target,{
           center: tokyo,
           zoom: 10,
@@ -102,7 +105,13 @@
           $i = 0;
           while($i<$count){
             echo 'var point = {lat: '. $lat[$i] .', lng: '. $lng[$i] .'};';
-            echo 'marker = new google.maps.Marker({ position: point, map: map});';
+            echo "marker[$i] = new google.maps.Marker({ position: point, map: map, animation:google.maps.Animation.DROP});";
+            echo "infoWindow[$i] = new google.maps.InfoWindow({";
+            echo "content: '<div class=".'"'.'contentsName">'. $name[$i] .'</div><br><p>'. $address[$i] ."</p>'"; //<div class = "">
+            echo '});';
+            echo "marker[$i].addListener('click', function(){";
+            echo "infoWindow[$i].open(map, marker[$i]);";
+            echo '});';
             $i++;
           }
         }
