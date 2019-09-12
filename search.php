@@ -78,11 +78,8 @@
         </select></p><br>
         <p>
         <label for="faculty">学部</label>
-        <select name="faculty">
-          <option value=""></option>
-          <option value="理工学部">理工学部</option>
-          <option value="経済学部">経済学部</option>
-        </select></p><br>
+        <input type="text" name="faculty">
+        </p><br>
         <p>
         <label for="大学院">大学院の有無</label>
         <input name="graduate" type="radio" value="有">有

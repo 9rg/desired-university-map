@@ -57,7 +57,7 @@
           $con .= " AND prefecture = '$prefecture'";
         }
         if($faculty){
-          $con .= " AND faculty = '$faculty'";
+          $con .= " AND faculty like '%$faculty%'";
         }
         if($graduate){
           $con .= " AND graduate = '$graduate'";
