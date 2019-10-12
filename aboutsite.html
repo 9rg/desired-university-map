@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta  charset=UTF-8>
+  <meta name="viewpoint" user-scalable=no>
+  <title>志望校MAP</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <a href="map.php"><h1>志望校MAP</h1></a>
+    <nav>
+      <ul>
+        <li><button type="button" onclick="location.href='map.php'">マップ</button></li>
+        <li><button type="button" onclick="location.href='search.php'">条件指定</button></li>
+        <li><button type="button" onclick="location.href='aboutsite.php'">当サイトについて</button></li>
+        <li><button type="button" onclick="clickEvent()">ご意見箱</button></li>
+        <script type="text/javascript">
+        function clickEvent(){
+          alert('近日公開！');
+        }
+        </script>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="message">
+      <h2>このサイトについて</h2>
+      <p>大学受験において、志望校選択はとても重要。</p>
+      <p>選択基準はたくさんありますが、いざ通うとなると外せない条件が"立地"。</p>
+      <p>このサイトでは、志望校を"立地"という視点から、視覚的に絞り込むことができます。</p>
+      <p>偏差値や受験科目だけでは目に止まらなかった大学を、ぜひ見つけてください。</p>
+      <image src="book.png" alt="受験生" title="受験生">
+    </div>
+  </main>
+</body>
+</html>

@@ -2,90 +2,116 @@
 <html lang="ja">
 <head>
   <meta  charset=UTF-8>
-  <title>検索フォーム</title>
+  <meta name="viewpoint" user-scalable=no>
+  <title>志望校MAP</title>
   <link href="style.css" rel="stylesheet">
+  <script type="text/javascript">
+  function check(){
+    var flag = 0;
+    if(document.form1.type.value == ""){
+      flag += 1;
+    }
+    if(document.form1.region.value == ""){
+      flag += 1;
+    }
+    if(document.form1.prefecture.value == ""){
+      flag += 1;
+    }
+    if(document.form1.faculty.value == ""){
+      flag += 1;
+    }
+    if(flag == 4){
+      alert('最低１項目、条件を指定してください。');
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  </script>
 </head>
 
 <body>
   <header>
-    <a href="map.php"><h1>志望校MAP</h1></a>
+    <a href="search.php"><h1>志望校MAP</h1></a>
     <nav>
       <ul>
         <li><button type="button" onclick="location.href='map.php'">マップ</button></li>
         <li><button type="button" onclick="location.href='search.php'">条件指定</button></li>
-        <li><button type="button" onclick="clickEvent()">当サイトについて</button></li>
-        <li><button type="button" onclick="clickEvent()">会員登録・ログイン</button></li>
+        <li><button type="button" onclick="location.href='aboutsite.html'">当サイトについて</button></li>
+        <li><button type="button" onclick="clickEvent()">ご意見箱</button></li>
         <script type="text/javascript">
         function clickEvent(){
           alert('近日公開！');
         }
         </script>
       </ul>
-    </nab>
+    </nav>
   </header>
 
   <main>
     <div class="searchForm">
       <h2>検索条件の設定</h2>
-      <form method="post" action="map.php">
+      <form method="post" action="map.php" name="form1">
         <p>
-        <label for="type">学校の区分</label>
-        <select name="type">
-          <option value="私立">私立大学</option>
-          <option value="国立">国立大学</option>
-          <option value="公立">公立大学</option>
-          <option value="指定しない">指定しない</option>
-        </select></p><br>
+          <label for="type">学校の区分</label>
+          <select name="type">
+            <option value=""></option>
+            <option value="1">私立大学</option>
+            <option value="2">国立大学</option>
+            <option value="3">公立大学</option>
+          </select>
+        </p><br>
         <p>
-        <label for="region">地方区分</label>
-        <select name="region">
-          <option value=""></option>
-          <option value="北海道・東北地区">北海道・東北地区</option>
-          <option value="関東（茨木・栃木・群馬）">関東（茨木・栃木・群馬）</option>
-          <option value="関東（埼玉・千葉・神奈川）">関東（埼玉・千葉・神奈川）</option>
-          <option value="関東（東京）">関東（東京）</option>
-          <option value="甲信越地区">甲信越地区</option>
-          <option value="東海・北陸地区">東海・北陸地区</option>
-          <option value="近畿地区">近畿地区</option>
-          <option value="中国・四国地区">中国・四国地区</option>
-          <option value="九州・沖縄地区">九州・沖縄地区</option>
-          <option value="関東・甲信越地区">(国立のみ)関東・甲信越地区</option>
-          <option value="東海・北陸・近畿地区">(国立のみ)東海・北陸・近畿地区</option>
-        </select></p><br>
+          <label for="region">地方区分</label>
+          <select name="region">
+            <option value=""></option>
+            <option value="1">北海道・東北地方</option>
+            <option value="2">関東地方</option>
+            <option value="3">中部地方</option>
+            <option value="4">近畿地方</option>
+            <option value="5">中国地方</option>
+            <option value="6">四国地方</option>
+            <option value="7">九州地方</option>
+          </select>
+        </p><br>
         <p>
         <label for="prefecture">都道府県名</label>
         <select name="prefecture">
           <option value=''></option>
           <?php
           $mysqli = new mysqli( 'localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ' ,'kuragane');
-          if( $mysqli->connect_errno ) {
-            echo $mysqli->connect_errno . ' : ' . $mysqli->connect_error;
+          if( $mysqli->connect_error) {
+            echo $mysqli->connect_error;
+            exit();
           }
-
-          $dbc = mysqli_connect( 'localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane')
-          or die( 'エラー：MySQLサーバとの接続に失敗しました。');
-
-          $query = "SELECT * FROM prefecture_table";
-          $result = mysqli_query($dbc, $query)
-          or die( 'エラー：データベースとの問い合わせに失敗しました。');
-
-          while($row = mysqli_fetch_array($result)){
-            $prefecture = $row['prefecture_name'];
-            echo '<option value="'.$prefecture.'">'.$prefecture.'</option>';
+          else{
+            $mysqli->set_charset("utf-8");
+          }
+          $sql = "SELECT * FROM prefecture_table";
+          if($result = $mysqli->query($sql)){
+            while($row = $result->fetch_assoc()){
+              $prefecture = $row['prefecture_name'];
+              $id = $row['prefecture_id'];
+              echo '<option value="'.$id.'">'.$prefecture.'</option>';
+            }
           }
           $mysqli->close();
           ?>
-        </select></p><br>
-        <p>
+        </select>
+      </p><br>
+      <p>
         <label for="faculty">学部</label>
-        <input type="text" name="faculty">
-        </p><br>
-        <p>
-        <label for="大学院">大学院の有無</label>
-        <input name="graduate" type="radio" value="有">有
-        <input name="graduate" type="radio" value="無">無</p><br>
-        <input type="submit" value="この条件で検索" name="submit" class="go">
-      </form>
+        <input type="text" name="faculty" class="faculty" value="" placeholder="検索したい学部系統のキーワードを入力してください。 例：理工">
+      </p><br>
+      <!--
+      <p>
+      <label for="大学院">大学院の有無</label>
+      <input name="graduate" type="radio" value="有">有
+      <input name="graduate" type="radio" value="無">無</p><br>
+      -->
+      <input type="submit" value="この条件で検索" name="submit" class="go" onclick="return check()">
+    </form>
     </div>
   </main>
 </body>

@@ -1,15 +1,28 @@
 /*メインのカスタム*/
 
+html{
+  height:100%;
+}
+
 #target{
   margin: 10px auto;
   width:1200px;
   height:500px;
 }
 
-h1{
+header a{
+  display: block;
+  margin-left: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+header a h1{
+  color: #FFF;
   font-weight: bold;
   float: left;
-  margin-left: 50px;
+
 }
 
 nav ul{
@@ -38,17 +51,30 @@ nav ul li button:hover{
 }
 
 header{
+  background-color: #9BD0FA;
+  header:100%;
   width:100%;
-  height:100px;
+  vertical-align: middle;
   border-bottom:solid #006EFF 5px;
-  height:20%;
-
+  height:10%;
+  position: relative;
 }
 
 header:after{
   content:'';
   display:block;
   clear:both;
+}
+
+body{
+  height:100%;
+  margin:0;
+  background-color: #FFF;
+  background-image: linear-gradient(rgba(155,208,208,0),rgba(155,208,208,0.5));
+}
+
+input.faculty{
+  width:350px;
 }
 
 .message{
@@ -73,6 +99,7 @@ header:after{
 
 .searchParent{
   display: block;
+  height:auto;
   width: auto;
   text-align: center;
 }
@@ -94,12 +121,11 @@ header:after{
 .searchForm h2{
   text-align: left;
   margin-left: 100px;
+  margin-bottom: 10%;
 }
 
 .searchForm form label{
   font-size: 20px;
-  margin-bottom: 800px;
-  padding-bottom: 800px;
 }
 
 .go{
@@ -116,4 +142,22 @@ header:after{
   background-color: #3377FF;
   text-shadow: 0 0 6px #FFF;
   box-shadow: 0 0 6px #37F;
+}
+
+/*========================================
+このサイトについて
+==========================================*/
+.message h2{
+  text-align: left;
+  margin-left: 10%;
+  margin-bottom: 10%;
+}
+.message{
+  text-align: center;
+}
+
+.message img{
+  margin-top: 10%;
+  width: 10%;
+  height: auto;
 }
