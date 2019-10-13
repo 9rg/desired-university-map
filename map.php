@@ -19,18 +19,13 @@
   ?>
 
   <header>
-    <a href="search.php"><h1>志望校MAP</h1></a>
+    <a href="index.php"><h1>志望校MAP</h1></a>
     <nav>
       <ul>
         <li><button type="button" onclick="location.href='map.php'">マップ</button></li>
-        <li><button type="button" onclick="location.href='search.php'">条件指定</button></li>
+        <li><button type="button" onclick="location.href='index.php'">条件設定</button></li>
         <li><button type="button" onclick="location.href='aboutsite.html'">当サイトについて</button></li>
-        <li><button type="button" onclick="clickEvent()">ご意見箱</button></li>
-        <script type="text/javascript">
-        function clickEvent(){
-          alert('近日公開！');
-        }
-        </script>
+        <li><button type="button" onclick="location.href='opinionBox.html'">ご意見箱</button></li>
       </ul>
     </nav>
   </header>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta  charset=UTF-8>
+  <meta name="viewpoint" user-scalable=no>
+  <title>志望校MAP</title>
+  <link href="style.css" rel="stylesheet">
+  <script type="text/javascript">
+  function check(){//１項目以上入力しているかチェックする関数
+    var type = 0;
+    var opinion = 0;
+    if(document.opinionForm.type.value == ""){
+      type += 1;
+    }
+    if(document.opinionForm.opinion.value == ""){
+      opinion += 1;
+    }
+    if(type == 1){
+      alert('最低１項目、ご意見の種類を指定してください。');
+      return false;
+    }
+    else if (opinion == 1) {
+      alert('文字が入力されていません。');
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <a href="index.php"><h1>志望校MAP</h1></a>
+    <nav>
+      <ul>
+        <li><button type="button" onclick="location.href='map.php'">マップ</button></li>
+        <li><button type="button" onclick="location.href='index.php'">条件設定</button></li>
+        <li><button type="button" onclick="location.href='aboutsite.html'">当サイトについて</button></li>
+        <li><button type="button" onclick="location.href='opinionBox.html'">ご意見箱</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="opinionBox">
+      <p>お気付きの点がありましたら、以下のフォームからお知らせ下さい。</p>
+      <form name="opinionForm" method="post" action="thanks.php">
+        <label for="name">名前</label>
+        <input type="text" name="name"><br>
+        <label for="type">ご意見の種類(必須)</label><br>
+        <input type="radio" name="type" value="1">マップ表示ページについて</input><br>
+        <input type="radio" name="type" value="2">検索条件ページについて</input><br>
+        <input type="radio" name="type" value="3">サイト全体のデザインについて</input><br>
+        <input type="radio" name="type" value="4">その他</input><br>
+        <label for="opinion">具体的なご意見内容(必須)</label><br>
+        <textarea name="opinion"></textarea><br>
+        <input type="submit" value="送信" name="submit" onclick="return check()" />
+      </form>
+    </section>
+  </main>
+</body>
+</html>
