@@ -2,6 +2,7 @@
 
 $text = '';
 
+/*学校区分の言語化*/
 if($type){
   switch ($type) {
     case '1':
@@ -20,6 +21,7 @@ if($type){
   $text .= ' 学校区分：'.$type;
 }
 
+/*地方の言語化*/
 if($region){
   switch ($region) {
     case '1':
@@ -50,8 +52,12 @@ if($region){
   $text .= ' 地方区分：'.$region;
 }
 
+/*県の言語化*/
 if($prefecture){
-  $mysqli = new mysqli( 'localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ' ,'kuragane');
+  require_once __DIR__.'/vendor/autoload.php';//環境変数から値を取得
+  $dotenv = Dotenv\Dotenv::create(__DIR__);
+  $dotenv->load();
+  $mysqli = new mysqli( getenv('MYSQLHOSTNAME'), getenv('MYSQLUSERNAME'), getenv('MYSQLPASSWORD'), getenv('MYSQLDBNAME'));
   if( $mysqli->connect_error) {
     echo $mysqli->connect_error;
     exit();
@@ -71,6 +77,7 @@ if($prefecture){
   $mysqli->close();
 }
 
+/*学部キーワード付け加える*/
 if($faculty){
   $text .= '<br>学部キーワード：'.$faculty;
 }

@@ -74,9 +74,13 @@
         <label for="prefecture">都道府県名</label>
         <select name="prefecture">
           <option value=''></option>
-          <?php//prefecture_tableテーブルからデータを取り出してセレクトボックスに表示
-          $mysqli = new mysqli( 'localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ' ,'kuragane');
-          if( $mysqli->connect_error) {
+          <?php
+          /*県名テーブルからデータを抜き出しセレクトボックスに表示*/
+          require_once __DIR__.'/vendor/autoload.php';//環境変数から値を取得
+          $dotenv = Dotenv\Dotenv::create(__DIR__);
+          $dotenv->load();
+          $mysqli = new mysqli( getenv('MYSQLHOSTNAME'), getenv('MYSQLUSERNAME'), getenv('MYSQLPASSWORD'), getenv('MYSQLDBNAME'));
+          if($mysqli->connect_error) {
             echo $mysqli->connect_error;
             exit();
           }

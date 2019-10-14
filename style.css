@@ -1,6 +1,10 @@
-/*メインのカスタム*/
+/*==================================================
+メインのカスタム
+====================================================*/
+
 
 html{
+  font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
   height:100%;
 }
 
@@ -73,9 +77,6 @@ body{
   background-image: linear-gradient(rgba(155,208,208,0),rgba(155,208,208,0.5));
 }
 
-input.faculty{
-  width:350px;
-}
 
 .message{
   text-align: center;
@@ -110,15 +111,21 @@ input.faculty{
   font-weight: bold;
 }
 
-/*ここからsearch用*/
+/*================================================
+index.php
+================================================*/
 
-.searchForm{
+input.faculty{
+  width:350px;
+}
+
+.searchForm, .opinionBox, .thanksMessage{
   display: block;
   text-align: center;
   width: auto;
 }
 
-.searchForm h2{
+.searchForm h2, .opinionBox h2{
   text-align: left;
   margin-left: 100px;
   margin-bottom: 10%;
@@ -160,4 +167,23 @@ input.faculty{
   margin-top: 10%;
   width: 10%;
   height: auto;
+}
+
+/*========================================
+ご意見箱
+=========================================*/
+
+.thanksMessage p{
+  margin-top: 20%;
+}
+
+.opinionForm{
+  width: 100%;
+  text-align: center;
+}
+
+.contents{
+  width: auto;
+  text-align: left;
+  display: inline-block;
 }

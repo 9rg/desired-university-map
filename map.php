@@ -33,7 +33,10 @@
   <main>
     <?php
     if(isset($_POST['type'], $_POST['region'], $_POST['prefecture'], $_POST['faculty'])){
-      $mysqli = new mysqli('localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane');
+      require_once __DIR__.'/vendor/autoload.php';//環境変数から値を取得
+      $dotenv = Dotenv\Dotenv::create(__DIR__);
+      $dotenv->load();
+      $mysqli = new mysqli( getenv('MYSQLHOSTNAME'), getenv('MYSQLUSERNAME'), getenv('MYSQLPASSWORD'), getenv('MYSQLDBNAME'));
       if($mysqli->connect_error){
         echo $mysqli->connect_error;
         exit();

@@ -45,18 +45,21 @@
 
   <main>
     <section class="opinionBox">
+      <h2>ご意見箱</h2>
       <p>お気付きの点がありましたら、以下のフォームからお知らせ下さい。</p>
-      <form name="opinionForm" method="post" action="thanks.php">
-        <label for="name">名前</label>
-        <input type="text" name="name"><br>
-        <label for="type">ご意見の種類(必須)</label><br>
-        <input type="radio" name="type" value="1">マップ表示ページについて</input><br>
-        <input type="radio" name="type" value="2">検索条件ページについて</input><br>
-        <input type="radio" name="type" value="3">サイト全体のデザインについて</input><br>
-        <input type="radio" name="type" value="4">その他</input><br>
-        <label for="opinion">具体的なご意見内容(必須)</label><br>
-        <textarea name="opinion"></textarea><br>
-        <input type="submit" value="送信" name="submit" onclick="return check()" />
+      <form name="opinionForm" class="opinionForm" method="post" action="thanks.php">
+        <section class="contents">
+          <label for="name">名前</label>
+          <input type="text" name="name"><br><br>
+          <label for="type">ご意見の種類(必須)</label><br>
+          <input type="radio" name="type" value="1">マップ表示ページについて</input><br>
+          <input type="radio" name="type" value="2">検索条件ページについて</input><br>
+          <input type="radio" name="type" value="3">サイト全体のデザインについて</input><br>
+          <input type="radio" name="type" value="4">その他</input><br><br>
+          <label for="opinion">具体的なご意見内容(必須)</label><br>
+          <textarea name="opinion"></textarea><br>
+          <input type="submit" value="送信" name="submit" onclick="return check()" />
+        </section>
       </form>
     </section>
   </main>

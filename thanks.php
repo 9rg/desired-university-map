@@ -23,13 +23,16 @@
   <main>
     <?php
     $type = $_POST['type'];
-    if(!$name){
-      $name = '匿名';
-    }
     $name = $_POST['name'];
+    if(!$name){
+      $name .= '匿名';
+    }
     $contents = $_POST['opinion'];
 
-    $mysqli = new mysqli('localhost', 'kuragane', 'VVmmjcU6TYTKJLQJ', 'kuragane');
+    require_once __DIR__.'/vendor/autoload.php';//環境変数から値を取得
+    $dotenv = Dotenv\Dotenv::create(__DIR__);
+    $dotenv->load();
+    $mysqli = new mysqli( getenv('MYSQLHOSTNAME'), getenv('MYSQLUSERNAME'), getenv('MYSQLPASSWORD'), getenv('MYSQLDBNAME'));
     if($mysqli->connect_error){
       echo $mysqli->connect_error;
       exit();
@@ -37,6 +40,7 @@
     else{
       $mysqli->set_charset("utf-8");
     }
+    /*プリペアードステートメント処理*/
     $stmt = $mysqli->prepare("INSERT INTO opinions (type, name, contents) VALUES (?,?,?)");//SQL文を作成
     $stmt->bind_param('iss', $type, $name, $contents);//変数をバインド(代入っぽい感じ)
     $stmt->execute();//SQL文の実行
