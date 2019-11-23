@@ -80,8 +80,14 @@
     }
     ?>
     <div id="target">
-      <script
-      src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyBVNWrMt19jJzpCOHDw6VN2g-LZdxuHIj4&callback=initMAP" async defer></script>
+      <?php
+      require_once __DIR__.'/vendor/autoload.php';//環境変数から値を取得
+      $dotenv = Dotenv\Dotenv::create(__DIR__);
+      $dotenv->load();
+      echo '<script ';
+      echo 'src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key='.getenv('APIKEY').'&callback=initMAP" async defer>';
+      ?>
+      </script>
       <script>
       function initMAP(){
         var target = document.getElementById('target');//描画領域の取得
